@@ -25,19 +25,13 @@ class Ui_Subwindow(object):
         self.tabEditor.setElideMode(QtCore.Qt.ElideNone)
         self.tabEditor.setUsesScrollButtons(True)
         self.tabEditor.setObjectName("tabEditor")
-        self.tabLista = QtWidgets.QWidget()
-        self.tabLista.setObjectName("tabLista")
-        self.verticalLayoutMan = QtWidgets.QVBoxLayout(self.tabLista)
-        self.verticalLayoutMan.setObjectName("verticalLayoutMan")
-        self.tabEditor.addTab(self.tabLista, "")
         self.verticalLayout_2.addWidget(self.tabEditor)
 
         self.retranslateUi(Subwindow)
-        self.tabEditor.setCurrentIndex(0)
+        self.tabEditor.setCurrentIndex(-1)
         QtCore.QMetaObject.connectSlotsByName(Subwindow)
 
     def retranslateUi(self, Subwindow):
         _translate = QtCore.QCoreApplication.translate
-        Subwindow.setWindowTitle(_translate("Subwindow", "Form"))
-        self.tabEditor.setTabText(self.tabEditor.indexOf(self.tabLista), _translate("Subwindow", "Lista 1"))
+        Subwindow.setWindowTitle(_translate("Subwindow", "Projeto 1"))
 import icons_rc

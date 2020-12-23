@@ -6,7 +6,9 @@ from PyQt5.Qt import QStandardItem, QStandardItemModel
 from time import time
 
 from uiMain import Ui_MainWindow
+
 import Variables
+from SubWindow import subWindow
 
 
 class StartMain(QtWidgets.QMainWindow):
@@ -26,6 +28,7 @@ class StartMain(QtWidgets.QMainWindow):
 
         self.ui.novoProjetoButton.clicked.connect(self.novo_projeto)
         self.ui.novaListaButton.clicked.connect(self.nova_lista)
+        self.ui.treeView.doubleClicked.connect(self.open_list)
 
 
 
@@ -56,6 +59,20 @@ class StartMain(QtWidgets.QMainWindow):
             lista.project_id = projeto.id
             lista.timestamp = str(time())
 
+            linha = Variables.Line()
+
+            linha.id = "l1"
+
+            linha.name = "Linha1"
+            linha.tag = "TAG"
+            linha.type = "Causa"
+            linha.signal = "Digital"
+            linha.pid = "PID"
+            linha.version = 1
+            linha.list_id = "L1"
+            linha.created_at = str(time())
+
+            lista.dirLines[linha.id] = linha
 
             projeto.dirList[lista.id] = lista
 
@@ -124,6 +141,38 @@ class StartMain(QtWidgets.QMainWindow):
         self.ui.treeView.model().item(index).appendRow(lista)
 
         self.ui.treeView.expandAll()
+
+
+    def open_list(self):
+
+        self.ui.treeView.expandAll()
+
+        parents = set()
+
+        flag_lista = False
+        for nomeProjeto in self.ui.treeView.selectedIndexes():
+            while nomeProjeto.parent().isValid():
+                nomeProjeto = nomeProjeto.parent()
+                flag_lista = True
+
+            parents.add(nomeProjeto.sibling(nomeProjeto.row(), 0))
+
+
+        if flag_lista == False:
+            nomeProjeto = [nomeProjeto.data() for nomeProjeto in sorted(parents)]
+            nomeProjeto = nomeProjeto[0]
+
+            index = [nomeProjeto.row() for nomeProjeto in sorted(parents)]
+            index = index[0]
+
+            id = "P" + str(index+1)
+
+            child = subWindow(self,self.dirProject[id])
+
+            self.ui.mdiArea.addSubWindow(child)
+            child.setWindowTitle(nomeProjeto)
+
+            child.show()
 
 
 
