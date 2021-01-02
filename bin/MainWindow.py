@@ -59,20 +59,20 @@ class StartMain(QtWidgets.QMainWindow):
             lista.project_id = projeto.id
             lista.timestamp = str(time())
 
-            linha = Variables.Line()
-
-            linha.id = "l1"
-
-            linha.name = "Linha1"
-            linha.tag = "TAG"
-            linha.type = "Causa"
-            linha.signal = "Digital"
-            linha.pid = "PID"
-            linha.version = 1
-            linha.list_id = "L1"
-            linha.created_at = str(time())
-
-            lista.dirLines[linha.id] = linha
+            # linha = Variables.Line()
+            #
+            # linha.id = "l1"
+            #
+            # linha.name = "Linha1"
+            # linha.tag = "TAG"
+            # linha.type = "Causa"
+            # linha.signal = "Digital"
+            # linha.pid = "PID"
+            # linha.version = 1
+            # linha.list_id = "L1"
+            # linha.created_at = str(time())
+            #
+            # lista.dirLines[linha.id] = linha
 
             projeto.dirList[lista.id] = lista
 
@@ -94,13 +94,15 @@ class StartMain(QtWidgets.QMainWindow):
             parents.add(index.sibling(index.row(), 0))
 
         index = [index.row() for index in sorted(parents)]
-        index = index[0]
 
 
-        if index == -1:
+
+        if index == -1 or index == []:
             QtWidgets.QMessageBox.warning(self, "Aviso", "Selecione um projeto.")
 
         else:
+
+            index = index[0]
 
             var_teste = QtWidgets.QMessageBox.question(self, "Aviso",
                                                        'Deseja criar uma nova lista?',
