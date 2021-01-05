@@ -3,14 +3,12 @@ A classe principal 'subWindow' é responsável pela configuração da janela sec
 presente nessa sub-janela.
 """
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtWidgets
 from datetime import datetime
-
 
 from uiSubwindow import Ui_Subwindow
 from configLista import listaTab
 from  Variables import Project, Line
-from XMLFile import XMLFile
 
 class subWindow(QtWidgets.QWidget):
     """Recebe como parâmetro de entrada a classe QtWidgets.QWidget que faz a gestão da janela secundária da interface gráfica.

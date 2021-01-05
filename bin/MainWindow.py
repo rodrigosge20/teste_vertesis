@@ -4,13 +4,11 @@ A classe principal 'StartMain' contem os principais elementos da janela principa
 
 import sys
 import os
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.Qt import QStandardItem, QStandardItemModel
 from datetime import datetime
 
 from uiMain import Ui_MainWindow
-
 from Variables import Project, List, Line
 from SubWindow import subWindow
 from XMLFile import XMLFile
@@ -101,6 +99,7 @@ class StartMain(QtWidgets.QMainWindow):
 
         actionAdicionar = QtWidgets.QAction("Adicionar", self)
         actionRemover = QtWidgets.QAction("Remover", self)
+        actionEditar = QtWidgets.QAction("Editar", self)
 
         actionAdicionar.triggered.connect(self.novo_projeto)
         actionAdicionar.setShortcut("+")
@@ -296,47 +295,59 @@ class StartMain(QtWidgets.QMainWindow):
         """Função responsável por salvar uma lista.
         """
 
-        parents = set()
-        flag_lista = False
-        # Verifica todos itens clicados na árvore
-        for nomeProjeto in self.ui.treeView.selectedIndexes():
-            while nomeProjeto.parent().isValid():  # enquanto o item clicado possuir um ramo pai, o nome desse item é
-                # alterado para o do pai, de forma a armazenar o nome do projeto
-                # da lista que foi clicada
-                # a flag_lista é alterada pra indicar que uma lista foi clicada
-                nomeProjeto = nomeProjeto.parent()
-                flag_lista = True
+        try:
+            parents = set()
+            flag_lista = False
+            # Verifica todos itens clicados na árvore
+            for nomeProjeto in self.ui.treeView.selectedIndexes():
+                while nomeProjeto.parent().isValid():  # enquanto o item clicado possuir um ramo pai, o nome desse item é
+                    # alterado para o do pai, de forma a armazenar o nome do projeto
+                    # da lista que foi clicada
+                    # a flag_lista é alterada pra indicar que uma lista foi clicada
+                    nomeProjeto = nomeProjeto.parent()
+                    flag_lista = True
 
-            parents.add(nomeProjeto.sibling(nomeProjeto.row(), 0))
+                parents.add(nomeProjeto.sibling(nomeProjeto.row(), 0))
 
-        nomeProjeto = [nomeProjeto.data() for nomeProjeto in sorted(parents)]
-        nomeProjeto = nomeProjeto[0]
+            nomeProjeto = [nomeProjeto.data() for nomeProjeto in sorted(parents)]
+            nomeProjeto = nomeProjeto[0]
 
-        # a variável 'key_projeto' armazena a id (chave) do projeto atual
-        for keys in sorted(self.dirProject):
-            if self.dirProject[keys].name == nomeProjeto:
-                key_projeto = keys
+            # a variável 'key_projeto' armazena a id (chave) do projeto atual
+            for keys in sorted(self.dirProject):
+                if self.dirProject[keys].name == nomeProjeto:
+                    key_projeto = keys
 
-        if flag_lista == True:
-            for index in self.ui.treeView.selectedIndexes():
-                nomeLista = index.data()
-                row = index.row()
+            if flag_lista == True:
+                for index in self.ui.treeView.selectedIndexes():
+                    nomeLista = index.data()
 
-                for keys in sorted(self.dirProject[key_projeto].dirList):
-                    if self.dirProject[key_projeto].dirList[keys].name == nomeLista:
-                        lista = self.dirProject[key_projeto].dirList[keys]
+                    for keys in sorted(self.dirProject[key_projeto].dirList):
+                        if self.dirProject[key_projeto].dirList[keys].name == nomeLista:
+                            lista = self.dirProject[key_projeto].dirList[keys]
+
+                    # O nome default do arquivo é "Untitled"
+                    title = "Untitled"
+
+            try:
+                print(lista)
+                # Abre-se uma janela de diálogo para salvar o arquivo desejado
+                filename, _ = QtWidgets.QFileDialog.getSaveFileName(self, "Salvar Lista como", title, "*.xml")
+
+                # Se o usuário clicou em Ok, a função save_xml da classe XMLFile é chamada para então criar um arquivo .xml
+                # com os projetos, listas e linhas criadas pelo usuário
+                if filename:
+                    XMLFile.save_lista_xml(self, filename, lista)
+            except UnboundLocalError:
+                QtWidgets.QMessageBox.warning(self, "Aviso", "Selecione uma lista")
 
 
-        # O nome default do arquivo é "Untitled"
-        title = "Untitled"
+        except IndexError:
+            QtWidgets.QMessageBox.warning(self, "Aviso", "Selecione uma lista")
 
-        # Abre-se uma janela de diálogo para salvar o arquivo desejado
-        filename, _ = QtWidgets.QFileDialog.getSaveFileName(self, "Salvar Lista como", title, "*.xml")
 
-        # Se o usuário clicou em Ok, a função save_xml da classe XMLFile é chamada para então criar um arquivo .xml
-        # com os projetos, listas e linhas criadas pelo usuário
-        if filename:
-            XMLFile.save_lista_xml(self, filename, lista)
+
+
+
 
     def abrir_projeto(self):
         """Função responsável por abrir um novo projeto na janela principal.
