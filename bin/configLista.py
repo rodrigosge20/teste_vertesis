@@ -43,7 +43,7 @@ class listaTab(VarTable):
             id_projeto = "P" + str(i + 1)
             projeto = mainWindow.dirProject[id_projeto]
 
-            if projeto.nome == nomeProjetoAtual:
+            if projeto.name == nomeProjetoAtual:
                 break
 
         numListas = projeto.dirList.keys()
@@ -52,7 +52,7 @@ class listaTab(VarTable):
             id_lista = "L" + str(i + 1)
             lista = projeto.dirList[id_lista]
 
-            if lista.nome == nomeListaAtual:
+            if lista.name == nomeListaAtual:
                 break
 
         linha = lista.dirLines["l" + str(row + 1)]

@@ -91,7 +91,10 @@
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="salvarListaButton">
+       <widget class="QToolButton" name="salvarProjetoButton">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="toolTip">
          <string>Salvar</string>
         </property>
@@ -105,7 +108,16 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="salvarTodasListasButton">
+       <widget class="QPushButton" name="salvarListaButton">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -127,49 +139,6 @@
          </size>
         </property>
        </spacer>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <property name="spacing">
-       <number>0</number>
-      </property>
-      <property name="sizeConstraint">
-       <enum>QLayout::SetMinimumSize</enum>
-      </property>
-      <item>
-       <widget class="QToolButton" name="upButton">
-        <property name="text">
-         <string>Parent</string>
-        </property>
-        <property name="icon">
-         <iconset resource="icons.qrc">
-          <normaloff>:/icons/images/001.png</normaloff>:/icons/images/001.png</iconset>
-        </property>
-        <property name="autoRepeatInterval">
-         <number>100</number>
-        </property>
-        <property name="popupMode">
-         <enum>QToolButton::DelayedPopup</enum>
-        </property>
-        <property name="toolButtonStyle">
-         <enum>Qt::ToolButtonIconOnly</enum>
-        </property>
-        <property name="autoRaise">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="dirEdit">
-        <property name="text">
-         <string/>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-       </widget>
       </item>
      </layout>
     </item>
@@ -273,10 +242,10 @@
     <property name="title">
      <string>Arquivo</string>
     </property>
-    <addaction name="actionBranco"/>
-    <addaction name="actionAbrir"/>
+    <addaction name="actionNovoProjeto"/>
+    <addaction name="actionAbrirProjeto"/>
     <addaction name="separator"/>
-    <addaction name="actionSalvar"/>
+    <addaction name="actionSalvarProjeto"/>
     <addaction name="separator"/>
     <addaction name="separator"/>
     <addaction name="actionFecharProjeto"/>
@@ -298,9 +267,9 @@
     <string>Fechar Projeto</string>
    </property>
   </action>
-  <action name="actionAbrir">
+  <action name="actionAbrirProjeto">
    <property name="text">
-    <string>Abrir Projeto         Ctrl + A</string>
+    <string>Abrir Projeto</string>
    </property>
   </action>
   <action name="actionAtivar_vari_vel">
@@ -313,12 +282,12 @@
     <string>Destivar variável</string>
    </property>
   </action>
-  <action name="actionSalvar">
+  <action name="actionSalvarProjeto">
    <property name="enabled">
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Salvar Projeto       Ctrl + S</string>
+    <string>Salvar Projeto</string>
    </property>
   </action>
   <action name="actionSalvarComo">
@@ -342,9 +311,9 @@
     <string>Propriedades</string>
    </property>
   </action>
-  <action name="actionBranco">
+  <action name="actionNovoProjeto">
    <property name="text">
-    <string>Novo Projeto        Ctrl + N</string>
+    <string>Novo Projeto</string>
    </property>
   </action>
   <action name="actionImportar">

@@ -110,20 +110,6 @@
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QPushButton" name="remButton">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string>Remover</string>
-       </property>
-       <property name="icon">
-        <iconset resource="../../../../Repositórios/BRConfig/bin/uis/icons.qrc">
-         <normaloff>:/icons/images/001_02.png</normaloff>:/icons/images/001_02.png</iconset>
-       </property>
-      </widget>
-     </item>
     </layout>
    </item>
   </layout>

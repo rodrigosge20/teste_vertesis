@@ -56,13 +56,6 @@ class Ui_VarTable(object):
         self.addButton.setFlat(False)
         self.addButton.setObjectName("addButton")
         self.horizontalLayout_24.addWidget(self.addButton)
-        self.remButton = QtWidgets.QPushButton(VarTable)
-        self.remButton.setEnabled(False)
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap(":/icons/images/001_02.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.remButton.setIcon(icon1)
-        self.remButton.setObjectName("remButton")
-        self.horizontalLayout_24.addWidget(self.remButton)
         self.verticalLayout.addLayout(self.horizontalLayout_24)
 
         self.retranslateUi(VarTable)
@@ -72,5 +65,4 @@ class Ui_VarTable(object):
         _translate = QtCore.QCoreApplication.translate
         VarTable.setWindowTitle(_translate("VarTable", "Form"))
         self.addButton.setText(_translate("VarTable", "Adicionar"))
-        self.remButton.setText(_translate("VarTable", "Remover"))
 import icons_rc
