@@ -1,7 +1,7 @@
 # teste_vertesis
 Teste PyQt5 - Aplicativo para Armazenar TAGs
 
-O arquivo StartMain.py presente na basta 'bin' é responsável por rodar a ferramenta. 
+O arquivo MainWindow.py presente na basta 'bin' é responsável por rodar a ferramenta. 
 
 Bibliotecas necessárias do python:
 
